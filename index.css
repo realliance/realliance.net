@@ -6,21 +6,47 @@
   overflow: hidden;
 }
 
-body{
-  /* background-image: url(stars2.gif);
-  background-size: 38vw; */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #333;
+  }
+  a {
+    color: #000;
+  }
+  #links {
+    background: #888
+  }  
+  #name {
+    background: #ddd;
+  }
+}
+
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: #ddd;
+  }
+  a {
+    color: #fff;
+  }
+  #links {
+    background: #555
+  }  
+  #name {
+    background: #333;
+  }
+}
+
+body {
   height: 100vh;
-  /* background-color: black; */
 }
 
 a {
   text-decoration: none;
-  color: #fff;
 }
 
 a:hover {
   text-decoration: underline;
-  color: #aaa
 }
 
 .content {
@@ -44,8 +70,8 @@ a:hover {
   position: absolute;
   top: -40px;
   left: 0;
-  background: #000000;
-  color: white;
+  background: #00000000;
+  color: #00000000;
   padding: 8px;
   z-index: 100;
 }
@@ -53,25 +79,14 @@ a:hover {
   top: 0;
 }
 
-#construction {
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-}
 
 #links {
   font-size: min(2em,6vw);
 }
 
-#install-now {
-  width: min(8em,24vw)
-  
-}
-
 #name {
   font-size: min(5em,15vw);
   margin: 0;
-  background: #eee;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
