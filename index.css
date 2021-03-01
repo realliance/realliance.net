@@ -1,0 +1,81 @@
+
+
+* {
+  font-family: 'Roboto', monospace;
+  font-display: swap;
+  overflow: hidden;
+}
+
+body{
+  /* background-image: url(stars2.gif);
+  background-size: 38vw; */
+  height: 100vh;
+  /* background-color: black; */
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #aaa
+}
+
+.content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000000;
+  color: white;
+  padding: 8px;
+  z-index: 100;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+#construction {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+#links {
+  font-size: min(2em,6vw);
+}
+
+#install-now {
+  width: min(8em,24vw)
+  
+}
+
+#name {
+  font-size: min(5em,15vw);
+  margin: 0;
+  background: #eee;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: min(400px,30vw);
+  background-position: center;
+  width: 100vw;
+}
