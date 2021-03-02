@@ -2,7 +2,8 @@ FROM docker.io/node:lts-alpine as builder
 
 WORKDIR /work
 
-RUN --mount=type=cache,target=/usr/local/lib/node npm install -g \
+# Removed for QuayIO build worker: --mount=type=cache,target=/usr/local/lib/node
+RUN npm install -g \
     @node-minify/cli \
     @node-minify/cssnano \
     @node-minify/html-minifier
