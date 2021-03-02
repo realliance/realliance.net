@@ -12,7 +12,7 @@ COPY . .
 RUN node-minify --compressor cssnano --input 'index.css' --output 'index.css' && \
     node-minify --compressor html-minifier --input 'index.html' --output 'index.html'
 
-FROM docker.io/nginxinc/nginx-unprivileged:alpine
+FROM docker.io/nginx:stable-alpine
 
 COPY --from=builder /work/nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /work/*.png /usr/share/nginx/html/
