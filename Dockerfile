@@ -15,5 +15,5 @@ RUN node-minify --compressor cssnano --input 'index.css' --output 'index.css' &&
 FROM docker.io/nginxinc/nginx-unprivileged:alpine
 
 COPY --from=builder /work/nginx.conf /etc/nginx/nginx.conf
-COPY --from=builder /work/*.png /usr/share/nginx/html/
+COPY --from=builder /work/favicon.ico /usr/share/nginx/html/
 COPY --from=builder /work/index.* /usr/share/nginx/html/
