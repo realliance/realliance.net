@@ -1,4 +1,4 @@
-FROM docker.io/node:lts-alpine@sha256:fb6cb918cc72869bd625940f42a7d8ae035c4e786d08187b94e8b91c6a534dfd as builder
+FROM docker.io/node:lts-alpine@sha256:a9b9cb880fa429b0bea899cd3b1bc081ab7277cc97e6d2dcd84bd9753b2027e1 as builder
 
 WORKDIR /work
 
