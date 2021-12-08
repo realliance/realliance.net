@@ -13,7 +13,7 @@ COPY . .
 RUN node-minify --compressor cssnano --input 'index.css' --output 'index.css' && \
     node-minify --compressor html-minifier --input 'index.html' --output 'index.html'
 
-FROM docker.io/nginx:stable-alpine@sha256:7b801536219e8b3a5dcaf0c5a34c4d4d0514e648905c83105d98c56740eb4f07
+FROM docker.io/nginx:stable-alpine@sha256:74694f2de64c44787a81f0554aa45b281e468c0c58b8665fafceda624d31e556
 
 COPY --from=builder /work/nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /work/favicon.ico /usr/share/nginx/html/
