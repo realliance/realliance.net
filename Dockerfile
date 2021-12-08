@@ -18,3 +18,4 @@ FROM docker.io/nginx:stable-alpine@sha256:7b801536219e8b3a5dcaf0c5a34c4d4d0514e6
 COPY --from=builder /work/nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /work/favicon.ico /usr/share/nginx/html/
 COPY --from=builder /work/index.* /usr/share/nginx/html/
+COPY --from=builder /work/terminated.* /usr/share/nginx/html/
