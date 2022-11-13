@@ -7,7 +7,11 @@ import postcss from 'https://deno.land/x/postcss/mod.js';
 import autoprefixer from 'https://dev.jspm.io/autoprefixer';
 import { mkdir, rmdir,  } from "https://deno.land/std@0.109.0/node/fs/promises.ts";
 import { existsSync } from "https://deno.land/std@0.109.0/fs/exists.ts";
+import * as log from "https://deno.land/std/log/mod.ts";
+import path from "https://deno.land/std@0.109.0/node/path.ts";
+import * as twd from "https://deno.land/x/twd@v0.1.5/mod.ts";
 
+const logger = log.getLogger();
 const OUTPUT_FOLDER = "build";
 
 /**
@@ -28,29 +32,44 @@ const prepareBuildFolder = async () => {
 const writeOutputFile = async (file: string, contents: string) => {
     const encoder = new TextEncoder();
     const data = encoder.encode(contents);
-    await Deno.writeFile(`${OUTPUT_FOLDER}/${file}`, data);
+    log.info(file);
+    await Deno.writeFile(path.join(OUTPUT_FOLDER, file), data);
+}
+
+const copyInFiles = async (fromDir: string, toDir: string) => {
+    for await (const dirEntry of Deno.readDir(fromDir)) {
+        log.info(dirEntry.name);
+        Deno.copyFile(path.join(fromDir, dirEntry.name), path.join(toDir, dirEntry.name));
+    }
 }
 
 // Step 1: Prepare build folder
-console.log("Preparing Build Folder");
+logger.info("== Preparing Build Folder");
 await prepareBuildFolder();
 
 // Step 2: Generate files to write
-console.log("Generating Files");
+logger.info("== Generating Files");
 
 // CSS
-const cssFile = await Deno.readTextFile("index.css");
+logger.info("Generating CSS");
+const cssFile = await Deno.readTextFile("src/misc.css");
 const css = await postcss([autoprefixer]).process(cssFile, { from: undefined });
 
 // HTML
-const html = await renderFile("index.pug");
+logger.info("Generating HTML");
+const html = await renderFile("src/index.pug");
+
+// Tailwind
+const tailwindCss = twd.generate([html], twd.init({ mode: "strict" }));
 
 // Step 3: Write Files
-console.log ("Writing Files");
+logger.info("== Writing Files");
 
 await Promise.all([
     writeOutputFile("index.html", html),
-    writeOutputFile("index.css", css.css)
+    writeOutputFile("misc.css", css.css),
+    writeOutputFile("tailwind.css", tailwindCss),
+    copyInFiles("static", "build"),
 ]);
 
 Deno.exit(0);
