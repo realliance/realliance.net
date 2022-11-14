@@ -1,20 +1,12 @@
-FROM docker.io/node:lts-alpine as builder
+FROM docker.io/denoland/deno as BUILDER
 
 WORKDIR /work
 
-# Removed for QuayIO build worker: --mount=type=cache,target=/usr/local/lib/node
-RUN npm install -g \
-    @node-minify/cli \
-    @node-minify/cssnano \
-    @node-minify/html-minifier
-
 COPY . .
 
-RUN node-minify --compressor cssnano --input 'index.css' --output 'index.css' && \
-    node-minify --compressor html-minifier --input 'index.html' --output 'index.html'
+RUN deno run --allow-read --allow-write --allow-env build.ts
 
 FROM docker.io/nginx:stable-alpine
 
 COPY --from=builder /work/nginx.conf /etc/nginx/nginx.conf
-COPY --from=builder /work/favicon.ico /usr/share/nginx/html/
-COPY --from=builder /work/index.* /usr/share/nginx/html/
+COPY --from=builder /work/build /usr/share/nginx/html/

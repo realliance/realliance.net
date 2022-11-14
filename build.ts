@@ -9,7 +9,7 @@ import { mkdir, rmdir,  } from "https://deno.land/std@0.109.0/node/fs/promises.t
 import { existsSync } from "https://deno.land/std@0.109.0/fs/exists.ts";
 import * as log from "https://deno.land/std/log/mod.ts";
 import path from "https://deno.land/std@0.109.0/node/path.ts";
-import * as twd from "https://deno.land/x/twd@v0.1.5/mod.ts";
+import * as twd from "https://deno.land/x/twd/mod.ts";
 
 const logger = log.getLogger();
 const OUTPUT_FOLDER = "build";
@@ -57,10 +57,12 @@ const css = await postcss([autoprefixer]).process(cssFile, { from: undefined });
 
 // HTML
 logger.info("Generating HTML");
-const html = await renderFile("src/index.pug");
+const html = renderFile("src/index.pug");
 
 // Tailwind
-const tailwindCss = twd.generate([html], twd.init({ mode: "strict" }));
+const tailwindCss = twd.generate([html], twd.init({ 
+    mode: "silent",
+}));
 
 // Step 3: Write Files
 logger.info("== Writing Files");
