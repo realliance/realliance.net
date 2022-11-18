@@ -1,0 +1,6 @@
+img.rounded {
+    object-fit: cover;
+    border-radius: 50%;
+    height: 7.5em;
+    width: 7.5em;
+  }

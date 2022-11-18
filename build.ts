@@ -5,23 +5,25 @@
 import { renderFile } from "https://deno.land/x/pug/mod.ts";
 import postcss from 'https://deno.land/x/postcss/mod.js';
 import autoprefixer from 'https://dev.jspm.io/autoprefixer';
-import { mkdir, rmdir,  } from "https://deno.land/std@0.109.0/node/fs/promises.ts";
-import { existsSync } from "https://deno.land/std@0.109.0/fs/exists.ts";
+import { mkdir, rmdir,  } from "https://deno.land/std/node/fs/promises.ts";
+import { existsSync } from "https://deno.land/std/fs/exists.ts";
 import * as log from "https://deno.land/std/log/mod.ts";
-import path from "https://deno.land/std@0.109.0/node/path.ts";
+import path from "https://deno.land/std/node/path.ts";
 import * as twd from "https://deno.land/x/twd/mod.ts";
+import { recursiveReaddir } from "https://deno.land/x/recursive_readdir/mod.ts";
+import { extname } from "https://deno.land/std/path/win32.ts";
+import * as toml from "https://deno.land/std/encoding/toml.ts";
+import { Image } from 'https://deno.land/x/imagescript/mod.ts';
 
 const logger = log.getLogger();
 const OUTPUT_FOLDER = "build";
+const INTERMEDIATE_FOLDER = "intermediate";
 
-/**
- * Removes and recreates the build output folder
- */
-const prepareBuildFolder = async () => {
-    if (existsSync(OUTPUT_FOLDER)) {
-        await rmdir(OUTPUT_FOLDER, { recursive: true });
+const prepareFolder = async (path: string) => {
+    if (existsSync(path)) {
+        await rmdir(path, { recursive: true });
     }
-    await mkdir(OUTPUT_FOLDER);
+    await mkdir(path);
 }
 
 /**
@@ -43,12 +45,53 @@ const copyInFiles = async (fromDir: string, toDir: string) => {
     }
 }
 
-// Step 1: Prepare build folder
-logger.info("== Preparing Build Folder");
-await prepareBuildFolder();
+interface MemberProfile {
+    name: string,
+    icon: string,
+    pronouns: string,
+    interests: string,
+    description: string,
+    github?: string,
+    website?: string,
+}
+
+const prepareMembers = async (memberDir: string) => {
+    await mkdir(`${OUTPUT_FOLDER}/members`);
+    
+    const aboutFiles = (await recursiveReaddir(memberDir)).filter((file: string) => extname(file) === ".toml");
+    const processedMembers = aboutFiles.map(async (aboutFile: string) => 
+    {
+        logger.info(`Processing ${aboutFile}`);
+        const decoder = new TextDecoder("utf-8");
+        const fileContents = await Deno.readFile(aboutFile);
+        const aboutObject = toml.parse(decoder.decode(fileContents)) as unknown as MemberProfile;
+        const iconPath = path.join(aboutFile, "..", aboutObject.icon);
+        const buildLocation = path.join("members", crypto.randomUUID() + ".jpg");
+        const newIconPath = path.join(OUTPUT_FOLDER, buildLocation);
+        const image = await Image.decode(await Deno.readFile(iconPath));
+        image.resize(300, Image.RESIZE_AUTO);
+        await Deno.writeFile(newIconPath, await image.encode());
+        return `+member("${aboutObject.name}", "${buildLocation}", "${aboutObject.pronouns}", "${aboutObject.interests}", "${aboutObject.description}", "${aboutObject.github}", "${aboutObject.website}")`
+    });
+    const newFiles = await Promise.all(processedMembers);
+    const file = newFiles.join('\n');
+    const encoder = new TextEncoder();
+    await Deno.writeFile(path.join(INTERMEDIATE_FOLDER, "_memberlist.pug"), encoder.encode(file));
+}
+
+// Step 1: Prepare build folders
+logger.info("== Preparing Build Folders");
+await Promise.all([
+    prepareFolder(OUTPUT_FOLDER),
+    prepareFolder(INTERMEDIATE_FOLDER)
+]);
 
 // Step 2: Generate files to write
 logger.info("== Generating Files");
+
+// Members
+logger.info("Parsing Members");
+await prepareMembers("members/");
 
 // CSS
 logger.info("Generating CSS");

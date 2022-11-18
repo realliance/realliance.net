@@ -1,0 +1,8 @@
+name = "Chris Miller"
+icon = "icon.jpg"
+pronouns = "he/they"
+interests = "Kubernetes, Game Dev, Rust, Coffee"
+github = "ChristopherJMiller"
+website = "https://chrismiller.xyz"
+
+description = "Chris is a SWE at Microsoft attempting to push the Rust agenda. Outside of his day job, they can be found tinkering on home labs, trying to make games, or at their local coffee shop."

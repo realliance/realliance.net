@@ -1,3 +1,4 @@
+include member.pug
 doctype html
 html(lang="en")
   head
@@ -17,4 +18,5 @@ html(lang="en")
       div.flex.flex-row.flex-wrap.gap-2.my-2.justify-center
         a(href="https://github.com/realliance", class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-4 py-2 text-md font-semibold text-black shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2") Github
         a(href="https://app.hackthebox.com/teams/overview/393", class="inline-flex items-center rounded-md border border-transparent bg-green-200 px-4 py-2 text-md font-semibold text-black shadow-sm hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2") HackTheBox
-
+      .max-w-4xl
+        include ../intermediate/_memberlist.pug
