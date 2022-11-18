@@ -9,7 +9,7 @@ Live at [realliance.net](https://realliance.net/)
 **Arch Linux Users** `pacman -S just deno watchexec`
 
 - [just](https://github.com/casey/just)
-- [deno](deno.land)
+- [deno](https://deno.land/)
 - [watchexec](https://github.com/watchexec/watchexec)
 
 ### Running locally
