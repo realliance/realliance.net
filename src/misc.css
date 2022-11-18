@@ -1,6 +1,5 @@
-img.rounded {
-    object-fit: cover;
-    border-radius: 50%;
-    height: 7.5em;
-    width: 7.5em;
-  }
+img.member {
+  object-fit: cover;
+  height: 7.5em;
+  width: 7.5em;
+}

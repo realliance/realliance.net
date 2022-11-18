@@ -45,14 +45,18 @@ const copyInFiles = async (fromDir: string, toDir: string) => {
     }
 }
 
+interface Website {
+    name: string,
+    link: string,
+}
+
 interface MemberProfile {
     name: string,
     icon: string,
     pronouns: string,
     interests: string,
     description: string,
-    github?: string,
-    website?: string,
+    websites: Website[],
 }
 
 const prepareMembers = async (memberDir: string) => {
@@ -65,13 +69,14 @@ const prepareMembers = async (memberDir: string) => {
         const decoder = new TextDecoder("utf-8");
         const fileContents = await Deno.readFile(aboutFile);
         const aboutObject = toml.parse(decoder.decode(fileContents)) as unknown as MemberProfile;
+        const websites = aboutObject.websites.map((site) => `["${site.name}", "${site.link}"]`).join(', ');
         const iconPath = path.join(aboutFile, "..", aboutObject.icon);
         const buildLocation = path.join("members", crypto.randomUUID() + ".jpg");
         const newIconPath = path.join(OUTPUT_FOLDER, buildLocation);
         const image = await Image.decode(await Deno.readFile(iconPath));
         image.resize(300, Image.RESIZE_AUTO);
         await Deno.writeFile(newIconPath, await image.encode());
-        return `+member("${aboutObject.name}", "${buildLocation}", "${aboutObject.pronouns}", "${aboutObject.interests}", "${aboutObject.description}", "${aboutObject.github}", "${aboutObject.website}")`
+        return `+member("${aboutObject.name}", "${buildLocation}", "${aboutObject.pronouns}", "${aboutObject.interests}", "${aboutObject.description}", ${websites})`
     });
     const newFiles = await Promise.all(processedMembers);
     const file = newFiles.join('\n');

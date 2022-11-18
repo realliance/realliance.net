@@ -1,15 +1,13 @@
-mixin member(name, icon, pronouns, interests, description, github, website)
+mixin member(name, icon, pronouns, interests, description, ...websites)
   .flex.my-4
     .flex.flex-row
-      img.rounded(src=icon)
+      img(src=icon).member
       .mx-2
-        .mb-1
-          p.text-xl.font-semibold= name
-          p.text-sm= pronouns
+        .mb-1.flex.flex-row.gap-1.content-center.items-center.self-center
+          span.text-xl.font-semibold= name
+          span.text-sm (#{pronouns})
         p.font-medium.text-md.my-1 Interests: #{interests}
         p.text-md= description
         .flex.flex-row.gap-1.my-1
-          if github != "undefined"
-            a(href=`https://github.com/${github}`, class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2 py-1 text-sm font-semibold text-black shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2") Github
-          if website != "undefined"
-            a(href=website, class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2 py-1 text-sm font-semibold text-black shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2") Website
+          each website in websites
+            a(href=website[1], class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2 py-1 text-sm font-semibold text-black shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2")= website[0]
