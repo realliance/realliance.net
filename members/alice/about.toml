@@ -1,0 +1,13 @@
+name = "Alice"
+icon = "icon.jpg"
+pronouns = "she/her"
+interests = "Linux Drivers, Embedded Software, Data Mining, Game Engine Development"
+description = "Mostly busy at work with Google, but sometimes find time to hack on projects and data mine games for friends."
+
+[[websites]]
+name = "Github"
+link = "https://github.com/HartleyAHartley"
+
+[[websites]]
+name = "Website"
+link = "https://AliceHartley.com"
