@@ -1,0 +1,13 @@
+name = "Jared"
+icon = "icon.jpg"
+pronouns = "he/him"
+interests = "FPGA Development"
+description = "Jared is a computer engineer grad student focusing on research around FPGA acceleration."
+
+[[websites]]
+name = "Github"
+link = "https://github.com/JaredHerbert11"
+
+[[websites]]
+name = "LinkedIn"
+link = "https://www.linkedin.com/in/jared-herbert-48827b204"
