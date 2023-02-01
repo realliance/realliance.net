@@ -1,0 +1,9 @@
+name = "Eddie"
+icon = "icon.jpg"
+pronouns = "???"
+interests = "???"
+description = "???"
+
+[[websites]]
+name = "Github"
+link = "https://github.com/devnoll"
