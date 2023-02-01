@@ -1,0 +1,9 @@
+name = "Meacham"
+icon = "icon.png"
+pronouns = "he/him"
+interests = "Game Servers, Reverse Engineering, Virtual Reality"
+description = "I don't know what meacham does tbh, but he's always working on cool things"
+
+[[websites]]
+name = "Github"
+link = "https://github.com/Meachamp"
