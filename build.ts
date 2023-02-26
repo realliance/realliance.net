@@ -5,7 +5,7 @@
 import { renderFile } from "https://deno.land/x/pug/mod.ts";
 import postcss from 'https://deno.land/x/postcss/mod.js';
 import autoprefixer from 'https://dev.jspm.io/autoprefixer';
-import { mkdir, rmdir,  } from "node:fs";
+import { mkdir, rmdir,  } from "node:fs/promises";
 import { existsSync } from "https://deno.land/std/fs/exists.ts";
 import * as log from "https://deno.land/std/log/mod.ts";
 import path from "node:path";

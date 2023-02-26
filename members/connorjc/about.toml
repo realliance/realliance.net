@@ -1,0 +1,9 @@
+name = "ConnorJC"
+icon = "avatar.png"
+pronouns = "he/him"
+interests = "Kubernetes, Video Games, (Ethical) Hacking"
+description = "SDE I at AWS, produces the monstrosities that tie our Kubernetes installation together\", [\"Github\", \"https://github.com/ConnorJC3\"], [\"Website\", \"https://connorjc.io\"])\nscript Array.prototype.slice.call(document.getElementsByTagName('p')).filter(el => el.textContent.includes('(Ethical) Hacking'))[0].innerHTML = 'Interests: Kubernetes, Video Games, <u id=\"hacking\" onclick=\"hacking()\"><a href=\"#\">(Ethical) Hacking</a></u>'; function hacking() { let target = document.getElementById('hacking'); target.setAttribute('onclick', ''); target.innerHTML = '(Ethical) Hacking'; target = target.parentNode; let wrapper = document.createElement('marquee'); wrapper.setAttribute('direction', 'right'); target.parentNode.replaceChild(wrapper, target); wrapper.appendChild(target); };\n//"
+
+[[websites]]
+name = "The build script breaks if I don't include at least one website"
+link = "https://owasp.org/www-community/Injection_Flaws"
