@@ -5,10 +5,10 @@
 import { renderFile } from "https://deno.land/x/pug/mod.ts";
 import postcss from 'https://deno.land/x/postcss/mod.js';
 import autoprefixer from 'https://dev.jspm.io/autoprefixer';
-import { mkdir, rmdir,  } from "https://deno.land/std/node/fs/promises.ts";
+import { mkdir, rmdir,  } from "node:fs";
 import { existsSync } from "https://deno.land/std/fs/exists.ts";
 import * as log from "https://deno.land/std/log/mod.ts";
-import path from "https://deno.land/std/node/path.ts";
+import path from "node:path";
 import * as twd from "https://deno.land/x/twd/mod.ts";
 import { recursiveReaddir } from "https://deno.land/x/recursive_readdir/mod.ts";
 import { extname } from "https://deno.land/std/path/win32.ts";
