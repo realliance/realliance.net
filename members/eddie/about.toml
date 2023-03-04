@@ -1,0 +1,9 @@
+name = "Eddie"
+icon = "icon.png"
+pronouns = "he/they"
+interests = "Programming, Philosophy, Art"
+description = "no-op"
+
+[[websites]]
+name = "Github"
+link = "https://github.com/devnoll"
