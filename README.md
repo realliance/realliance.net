@@ -1,26 +1,7 @@
-# Realliance Website
+# realliance.net: moved
 
-Live at [realliance.net](https://realliance.net/)
+The Realliance website now lives on the Realliance forge:
+**https://git.realliance.net/realliance/realliance.net**
 
-## Getting Started
-
-### Install Requirements
-
-**Arch Linux Users** `pacman -S just deno watchexec`
-
-- [just](https://github.com/casey/just)
-- [deno](https://deno.land/)
-- [watchexec](https://github.com/watchexec/watchexec)
-
-### Running locally
-
-```
-# Build
-just
-
-# Build and serve locally
-just serve
-
-# Build and serve with directory watching to rebuild (recommended)
-just watch
-```
+The forge builds and releases it. This GitHub repository is archived, read-only and no longer
+updated. We carried its full history and every tag over to the forge.
